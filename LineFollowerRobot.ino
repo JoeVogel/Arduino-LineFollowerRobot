@@ -95,7 +95,7 @@ void motor_control()
 
   // Calculating the effective motor speed:
   left_motor_speed = initial_motor_speed+PID_value;
-  right_motor_speed = (initial_motor_speed-PID_value); //9 é a correção da variação entre motores    
+  right_motor_speed = (initial_motor_speed-PID_value);  
 
   if(left_motor_speed < 0)
     left_motor_speed = 0;
