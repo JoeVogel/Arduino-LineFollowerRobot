@@ -65,20 +65,12 @@ void read_sensor_values()
 
   if((sensor[0]==outline)&&(sensor[1]==outline)&&(sensor[2]==outline)&&(sensor[3]==outline)&&(sensor[4]==line))
     error=4;
-  else if((sensor[0]==outline)&&(sensor[1]==outline)&&(sensor[2]==outline)&&(sensor[3]==line)&&(sensor[4]==line))
-    error=3;
   else if((sensor[0]==outline)&&(sensor[1]==outline)&&(sensor[2]==outline)&&(sensor[3]==line)&&(sensor[4]==outline))
-    error=2;
-  else if((sensor[0]==outline)&&(sensor[1]==outline)&&(sensor[2]==line)&&(sensor[3]==line)&&(sensor[4]==outline))
     error=1;
   else if((sensor[0]==outline)&&(sensor[1]==outline)&&(sensor[2]==line)&&(sensor[3]==outline)&&(sensor[4]==outline))
     error=0;
-  else if((sensor[0]==outline)&&(sensor[1]==line)&&(sensor[2]==line)&&(sensor[3]==outline)&&(sensor[4]==outline))
-    error=-1;
   else if((sensor[0]==outline)&&(sensor[1]==line)&&(sensor[2]==outline)&&(sensor[3]==outline)&&(sensor[4]==outline))
-    error=-2;
-  else if((sensor[0]==line)&&(sensor[1]==line)&&(sensor[2]==outline)&&(sensor[4]==outline)&&(sensor[4]==outline))
-    error=-3;
+    error=-1;
   else if((sensor[0]==line)&&(sensor[1]==outline)&&(sensor[2]==outline)&&(sensor[4]==outline)&&(sensor[4]==outline))
     error=-4;
 }
@@ -105,10 +97,6 @@ void motor_control()
   left_motor_speed = initial_motor_speed+PID_value;
   right_motor_speed = (initial_motor_speed-PID_value); //9 é a correção da variação entre motores    
 
-  // The motor speed should not exceed the max PWM value
-  /*constrain(left_motor_speed,0,255);
-   constrain(right_motor_speed,0,255);*/
-
   if(left_motor_speed < 0)
     left_motor_speed = 0;
   if(right_motor_speed < 0)
@@ -126,6 +114,7 @@ void stopMotors(){
   analogWrite(motorA_PWM,0);   
   analogWrite(motorB_PWM,0);  
 }
+
 
 
 
