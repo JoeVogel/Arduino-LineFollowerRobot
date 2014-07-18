@@ -1,9 +1,9 @@
-float Kp=25,Ki=0,Kd=0;
+float Kp=25,Ki=0,Kd=2;
 float error=0, P=0, I=0, D=0, PID_value=0;
 float previous_error=0, previous_I=0;
 int sensor[5]={
   0, 0, 0, 0, 0};
-int initial_motor_speed=100; /*Minimo 32*/
+int initial_motor_speed=80; /*Minimo 32*/
 
 const int motorA = 2; //Direita
 const int motorB = 4; //Esquerda
@@ -44,12 +44,9 @@ void setup()
 
 void loop()
 {
-  if(millis() < 23500){
     read_sensor_values();
     calculate_pid();
     motor_control();
-  }
-  else stopMotors();
 }
 
 void read_sensor_values()
@@ -67,14 +64,15 @@ void read_sensor_values()
     error=4;
   else if((sensor[0]==line)&&(sensor[1]==outline)&&(sensor[2]==outline)&&(sensor[4]==outline)&&(sensor[4]==outline))
     error=-4;
+
   
-  if((sensor[0]==outline)&&(sensor[1]==outline)&&(sensor[2]==outline)&&(sensor[3]==line)&&(sensor[4]==line))
+  /*if((sensor[0]==outline)&&(sensor[1]==outline)&&(sensor[2]==outline)&&(sensor[3]==line)&&(sensor[4]==line))
     error=3;
   else if((sensor[0]==line)&&(sensor[1]==line)&&(sensor[2]==outline)&&(sensor[3]==outline)&&(sensor[4]==outline))
-    error=-3;
+    error=-3;*/
 
   if((sensor[0]==outline)&&(sensor[1]==outline)&&(sensor[2]==outline)&&(sensor[3]==line)&&(sensor[4]==outline))
-    error=2;
+      error=2;
   else if((sensor[0]==outline)&&(sensor[1]==line)&&(sensor[2]==outline)&&(sensor[3]==outline)&&(sensor[4]==outline))
     error=-2;
 
@@ -83,7 +81,7 @@ void read_sensor_values()
   else if((sensor[0]==outline)&&(sensor[1]==line)&&(sensor[2]==line)&&(sensor[3]==outline)&&(sensor[4]==outline))
     error=-1;
 
-  if((sensor[0]==outline)&&(sensor[1]==outline)&&(sensor[2]==line)&&(sensor[3]==outline)&&(sensor[4]==outline))
+  if((sensor[1]==outline)&&(sensor[2]==line)&&(sensor[3]==outline))
     error=0;
 }
 
@@ -107,7 +105,7 @@ void motor_control()
 
   // Calculating the effective motor speed:
   left_motor_speed = initial_motor_speed+PID_value;
-  right_motor_speed = (initial_motor_speed-PID_value);  
+  right_motor_speed = (initial_motor_speed-PID_value); //9 é a correção da variação entre motores    
 
   if(left_motor_speed < 0)
     left_motor_speed = 0;
