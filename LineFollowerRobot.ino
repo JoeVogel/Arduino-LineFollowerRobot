@@ -1,4 +1,4 @@
-float Kp=25,Ki=0,Kd=2;
+float Kp=25,Ki=0.6,Kd=2;
 float error=0, P=0, I=0, D=0, PID_value=0;
 float previous_error=0, previous_I=0;
 int sensor[5]={
@@ -113,7 +113,7 @@ void motor_control()
     right_motor_speed = 0;
 
   analogWrite(motorA_PWM,left_motor_speed);   //Left Motor Speed
-  analogWrite(motorB_PWM,right_motor_speed);  //Right Motor Speed
+  analogWrite(motorB_PWM,right_motor_speed * 1.1);  //Right Motor Speed
 
   /*Aciona Motores(Frente)*/
   digitalWrite(motorA,LOW);
@@ -124,7 +124,6 @@ void stopMotors(){
   analogWrite(motorA_PWM,0);   
   analogWrite(motorB_PWM,0);  
 }
-
 
 
 
