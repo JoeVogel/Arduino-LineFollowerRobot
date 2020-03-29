@@ -5,6 +5,18 @@
 	Centro Universitário Católica de Santa Catarina
 */
 
+
+#define motorA 2 //Motor Direita
+#define motorB 4 //Motor Esquerda
+#define motorA_PWM 3
+#define motorB_PWM 5
+
+#define ss1 8;  // sensor 1  
+#define ss2 9;  // sensor 2   
+#define ss3 10; // sensor 3   
+#define ss4 11; // sensor 4   
+#define ss5 12; // sensor 5   
+
 //Declaração das variáveis utilizadas durante a execução do programa
 float Kp=25,Ki=0.6,Kd=2;
 float error=0, P=0, I=0, D=0, PID_value=0;
@@ -12,19 +24,8 @@ float previous_error=0, previous_I=0;
 int sensor[5]={0, 0, 0, 0, 0};
 int initial_motor_speed=80;
 
-const int motorA = 2; //Motor Direita
-const int motorB = 4; //Motor Esquerda
-const int motorA_PWM = 3;
-const int motorB_PWM = 5;
 int line;
 int outline;
-
-const int ss1 = 8;  // sensor 1  
-const int ss2 = 9;  // sensor 2   
-const int ss3 = 10; // sensor 3   
-const int ss4 = 11; // sensor 4   
-const int ss5 = 12; // sensor 5   
-//const int ss6 = 13; // sensor Near
 
 //Declaração das funções
 void read_sensor_values(void);
@@ -44,7 +45,7 @@ void setup()
   pinMode(ss3, INPUT);
   pinMode(ss4, INPUT);
   pinMode(ss5, INPUT);
-  //pinMode(ss6, INPUT);
+
 
   delay(500);
 }
@@ -134,6 +135,3 @@ void stopMotors(){
   analogWrite(motorA_PWM,0);   
   analogWrite(motorB_PWM,0);  
 }
-
-
-
